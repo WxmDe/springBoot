@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wxm.dao.ITableaDao">
+  <resultMap id="BaseResultMap" type="com.wxm.domain.Tablea">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="num" jdbcType="VARCHAR" property="num" />
+    <result column="date" jdbcType="DATE" property="date" />
+    <result column="price" jdbcType="REAL" property="price" />
+    <result column="flightnum" jdbcType="VARCHAR" property="flightnum" />
+    <result column="leg" jdbcType="VARCHAR" property="leg" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, num, date, price, flightnum, leg
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tablea
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from tablea
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.wxm.domain.Tablea">
+    insert into tablea (id, num, date, price, 
+      flightnum, leg)
+    values (#{id,jdbcType=BIGINT}, #{num,jdbcType=VARCHAR}, #{date,jdbcType=DATE}, #{price,jdbcType=REAL}, 
+      #{flightnum,jdbcType=VARCHAR}, #{leg,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wxm.domain.Tablea">
+    insert into tablea
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="num != null">
+        num,
+      </if>
+      <if test="date != null">
+        date,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="flightnum != null">
+        flightnum,
+      </if>
+      <if test="leg != null">
+        leg,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="num != null">
+        #{num,jdbcType=VARCHAR},
+      </if>
+      <if test="date != null">
+        #{date,jdbcType=DATE},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=REAL},
+      </if>
+      <if test="flightnum != null">
+        #{flightnum,jdbcType=VARCHAR},
+      </if>
+      <if test="leg != null">
+        #{leg,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wxm.domain.Tablea">
+    update tablea
+    <set>
+      <if test="num != null">
+        num = #{num,jdbcType=VARCHAR},
+      </if>
+      <if test="date != null">
+        date = #{date,jdbcType=DATE},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=REAL},
+      </if>
+      <if test="flightnum != null">
+        flightnum = #{flightnum,jdbcType=VARCHAR},
+      </if>
+      <if test="leg != null">
+        leg = #{leg,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wxm.domain.Tablea">
+    update tablea
+    set num = #{num,jdbcType=VARCHAR},
+      date = #{date,jdbcType=DATE},
+      price = #{price,jdbcType=REAL},
+      flightnum = #{flightnum,jdbcType=VARCHAR},
+      leg = #{leg,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
